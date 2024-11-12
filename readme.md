@@ -4,7 +4,7 @@ run to install all dependencies
 
 # Run tests
 you can run tests with those commands bellow
-- npx playwright test
+- npx playwright test // run tests on terminal
 - npx playwright test --ui //open playwright interface 
 - npx playwright show-report
 - npx playwright test --headed --browser=all  //run tests in all browsers in the same time
