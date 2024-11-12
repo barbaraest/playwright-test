@@ -1,6 +1,6 @@
 const { test, expect } = require('@playwright/test');
-const data = require('./data');
-const id = require('./constants');
+const data = require('./constants/data');
+const id = require('./constants/constants');
 
 test.describe('product flow', () => {
     test.beforeEach(async ({ page }) => {

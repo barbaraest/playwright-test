@@ -1,6 +1,6 @@
 // utils.js
 const axios = require('axios');
-const data = require('./data');
+const data = require('./constants/data');
 
 async function createAdmUser() {
     const response = await axios.post(`${data.apiUrl}/usuarios`, {
