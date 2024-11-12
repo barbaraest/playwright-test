@@ -1,8 +1,8 @@
-# dependencies
+# Dependencies
 run to install all dependencies
 - npm install
 
-# run test
+# Run tests
 you can run tests with those commands bellow
 - npx playwright test
 - npx playwright test --ui //open playwright interface 
@@ -11,7 +11,8 @@ you can run tests with those commands bellow
 - npx playwright test/test.spec.js //runs specific test spec
 - npx playwright test -g "login with sucess" //run specific test 
 
-# configurations if you want to start a completely new project 
+# Configurations 
+If you want to start a completely new project you must run the commands bellow
 - npm install
 - npm init -y
 - npm i -D @playwright/test
