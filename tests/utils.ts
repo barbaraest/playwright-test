@@ -27,7 +27,6 @@ async function createAdmUser(): Promise<string> {
         password: admUser.password,
         administrador: 'true'
     };
-    console.log('Enviando dados do usuário:', userADM);
 
     const apiUrl = 'https://serverest.dev';
 
@@ -60,7 +59,6 @@ async function createUser(): Promise<string> {
         administrador: 'false'
     };
 
-    console.log('Enviando dados do usuário:', user);
     const apiUrl = 'https://serverest.dev';
 
     try {
