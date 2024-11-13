@@ -24,5 +24,8 @@ jobs:
     - name: Install dependencies
       run: npm install && npx playwright install
 
+    - name: Install node-fetch
+      run: npm install node-fetch@2
+
     - name: Run tests
       run: npm test
