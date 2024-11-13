@@ -1,4 +1,4 @@
-import * as data from './constants/data';
+import fetch from 'node-fetch';
 import { faker } from '@faker-js/faker';
 
 interface User {
