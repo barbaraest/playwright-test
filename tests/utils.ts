@@ -8,23 +8,11 @@ interface User {
     administrador: string;
 }
 
-const admUser = {
-    password: faker.internet.password(),
-    name: faker.person.firstName(),
-    email: faker.internet.email()
-};
-
-const regularUser = {
-    password: faker.internet.password(),
-    name: faker.person.firstName(),
-    email: faker.internet.email()
-};
-
-async function createAdmUser(): Promise<string> {
+async function createAdmUser(): Promise<User> {
     const userADM: User = {
-        nome: admUser.name,
-        email: admUser.email,
-        password: admUser.password,
+        nome: faker.person.firstName(),
+        email: faker.internet.email(),
+        password: faker.internet.password(),
         administrador: 'true'
     };
 
@@ -42,7 +30,7 @@ async function createAdmUser(): Promise<string> {
         const responseData = await response.json();
 
         if (response.status === 201 && responseData.message === 'Cadastro realizado com sucesso') {
-            return responseData._id;
+            return userADM;
         } else {
             throw new Error('Falha ao criar usuário');
         }
@@ -51,11 +39,11 @@ async function createAdmUser(): Promise<string> {
     }
 }
 
-async function createUser(): Promise<string> {
-    const user: User = {
-        nome: regularUser.name,
-        email: regularUser.email,
-        password: regularUser.password,
+async function createNonAdmUser(): Promise<User> {
+    const userNonADM: User = {
+        nome: faker.person.firstName(),
+        email: faker.internet.email(),
+        password: faker.internet.password(),
         administrador: 'false'
     };
 
@@ -67,13 +55,13 @@ async function createUser(): Promise<string> {
             headers: {
                 'Content-Type': 'application/json'
             },
-            body: JSON.stringify(user)
+            body: JSON.stringify(userNonADM)
         });
 
         const responseData = await response.json();
 
         if (response.status === 201 && responseData.message === 'Cadastro realizado com sucesso') {
-            return responseData._id;
+            return userNonADM;
         } else {
             throw new Error('Falha ao criar usuário');
         }
@@ -82,4 +70,4 @@ async function createUser(): Promise<string> {
     }
 }
 
-export { createAdmUser, createUser, admUser, regularUser };
+export { createAdmUser, createNonAdmUser, User };

@@ -2,12 +2,16 @@ import { test, expect } from '@playwright/test';
 import { faker } from '@faker-js/faker';
 import * as data from './constants/data';
 import * as id from './constants/constants';
-import { createAdmUser, admUser} from './utils';
+import { createAdmUser, createNonAdmUser, User } from './utils';
+
+let admUser: User;
+let nonAdmUser: User;
 
 test.beforeAll(async () => {
-    // Cria um usuário adm via API
-    await createAdmUser();
-})
+    // Cria um usuário adm e um usuário não adm via API e armazena os dados dos usuários criados
+    admUser = await createAdmUser();
+    nonAdmUser = await createNonAdmUser();
+});
 
 test.describe('Create user flow', () => {
     test.beforeEach(async ({ page }) => {
@@ -17,7 +21,7 @@ test.describe('Create user flow', () => {
         await page.fill(id.emailInput, admUser.email)
         await page.fill(id.passwordInput, admUser.password)
         await page.click(id.loginButton)
-        await expect(page.getByRole('heading', { name: 'Bem vindo ' + admUser.name})).toBeVisible()
+        await expect(page.getByRole('heading', { name: 'Bem vindo ' + admUser.nome})).toBeVisible()
     })
 
     const user = {

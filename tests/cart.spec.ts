@@ -1,20 +1,24 @@
 import { test, expect } from '@playwright/test';
 import * as data from './constants/data';
 import * as id from './constants/constants';
-import { createUser, regularUser } from './utils';
+import { createAdmUser, createNonAdmUser, User } from './utils';
+
+let admUser: User;
+let nonAdmUser: User;
 
 test.beforeAll(async () => {
-    // Cria um usuário adm via API
-    await createUser();
-})
+    // Cria um usuário adm e um usuário não adm via API e armazena os dados dos usuários criados
+    admUser = await createAdmUser();
+    nonAdmUser = await createNonAdmUser();
+});
 
 test.describe('Cart Flow', () => {
     test.beforeEach(async ({ page }) => {
         await page.goto(data.url)
         const title = await page.title()
         expect(title).toBe('Front - ServeRest')
-        await page.fill(id.emailInput, regularUser.email)
-        await page.fill(id.passwordInput, regularUser.password)
+        await page.fill(id.emailInput, nonAdmUser.email)
+        await page.fill(id.passwordInput, nonAdmUser.password)
         await page.click(id.loginButton)
         await expect(page.getByRole('heading', { name: 'Serverest Store' })).toBeVisible()
     })
