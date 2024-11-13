@@ -29,3 +29,7 @@ jobs:
 
     - name: Run tests
       run: npm test
+
+    - name: Generate Playwright report
+      run: npx playwright show-report
+      if: always()  
