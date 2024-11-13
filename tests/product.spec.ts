@@ -2,7 +2,7 @@ import { test, expect } from '@playwright/test';
 import * as data from './constants/data';
 import * as id from './constants/constants';
 
-test.describe('product flow', () => {
+test.describe('Product flow', () => {
     test.beforeEach(async ({ page }) => {
         await page.goto(data.url)
         const title = await page.title()

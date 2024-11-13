@@ -4,7 +4,7 @@ import * as data from './constants/data';
 import * as id from './constants/constants';
 
 
-test.describe('user flow', () => {
+test.describe('Create user flow', () => {
     test.beforeEach(async ({ page }) => {
         await page.goto(data.url)
         const title = await page.title()
