@@ -1,4 +1,5 @@
 import * as data from './constants/data';
+import { faker } from '@faker-js/faker';
 
 interface User {
     nome: string;
@@ -7,11 +8,23 @@ interface User {
     administrador: string;
 }
 
+const admUser = {
+    password: faker.internet.password(),
+    name: faker.person.firstName(),
+    email: faker.internet.email()
+};
+
+const regularUser = {
+    password: faker.internet.password(),
+    name: faker.person.firstName(),
+    email: faker.internet.email()
+};
+
 async function createAdmUser(): Promise<string> {
     const userADM: User = {
-        nome: data.name,
-        email: data.validEmailAdmin,
-        password: data.password,
+        nome: admUser.name,
+        email: admUser.email,
+        password: admUser.password,
         administrador: 'true'
     };
     console.log('Enviando dados do usuário:', userADM);
@@ -41,9 +54,9 @@ async function createAdmUser(): Promise<string> {
 
 async function createUser(): Promise<string> {
     const user: User = {
-        nome: data.name,
-        email: data.validEmail,
-        password: data.password,
+        nome: regularUser.name,
+        email: regularUser.email,
+        password: regularUser.password,
         administrador: 'false'
     };
 
@@ -71,4 +84,4 @@ async function createUser(): Promise<string> {
     }
 }
 
-export { createAdmUser, createUser };
+export { createAdmUser, createUser, admUser, regularUser };

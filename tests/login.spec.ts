@@ -1,9 +1,7 @@
 import { test, expect } from '@playwright/test';
 import * as data from './constants/data';
 import { emailInput, passwordInput, loginButton } from './constants/constants';
-import { createAdmUser, createUser } from './utils';
-
-
+import { createAdmUser, createUser, admUser, regularUser } from './utils';
 
 test.beforeAll(async () => {
        // Cria um usuário adm via API
@@ -32,16 +30,16 @@ test.describe('Login Flow', () => {``
     })
 
     test('login with sucess non admin user', async ({ page }) => {
-        await page.fill(emailInput, data.validEmail)
-        await page.fill(passwordInput, data.password)
+        await page.fill(emailInput, regularUser.email)
+        await page.fill(passwordInput, regularUser.password)
         await page.click(loginButton)
         await expect(page.getByRole('heading', { name: 'Serverest Store' })).toBeVisible()
     })
 
     test('login with sucess admin user', async ({ page }) => {
-        await page.fill(emailInput, data.validEmailAdmin)
-        await page.fill(passwordInput,data.password)
+        await page.fill(emailInput, admUser.email)
+        await page.fill(passwordInput, admUser.password)
         await page.click(loginButton)
-        await expect(page.getByRole('heading', { name: 'Bem vindo Barbara' })).toBeVisible()
+        await expect(page.getByRole('heading', { name: 'Bem vindo ' + admUser.name})).toBeVisible()
     })
 })

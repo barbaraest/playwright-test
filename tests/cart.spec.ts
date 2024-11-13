@@ -1,14 +1,20 @@
 import { test, expect } from '@playwright/test';
 import * as data from './constants/data';
 import * as id from './constants/constants';
+import { createUser, regularUser } from './utils';
+
+test.beforeAll(async () => {
+    // Cria um usuário adm via API
+    await createUser();
+})
 
 test.describe('Cart Flow', () => {
     test.beforeEach(async ({ page }) => {
         await page.goto(data.url)
         const title = await page.title()
         expect(title).toBe('Front - ServeRest')
-        await page.fill(id.emailInput, data.validEmail)
-        await page.fill(id.passwordInput, data.password)
+        await page.fill(id.emailInput, regularUser.email)
+        await page.fill(id.passwordInput, regularUser.password)
         await page.click(id.loginButton)
         await expect(page.getByRole('heading', { name: 'Serverest Store' })).toBeVisible()
     })
