@@ -32,4 +32,12 @@ jobs:
 
     - name: Generate Playwright report
       run: npx playwright show-report
-      if: always()  
+      if: failure() # Only generate report if tests fail
+      run: npx playwright show-report --output=playwright-report
+
+    - name: Upload Playwright report
+      if: failure()  # Only upload report if tests fail
+      uses: actions/upload-artifact@v2
+      with:
+        name: playwright-report
+        path: playwright-report
