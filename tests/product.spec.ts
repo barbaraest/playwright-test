@@ -9,7 +9,6 @@ test.beforeAll(async () => {
     await createAdmUser();
 })
 
-
 test.describe('Product flow', () => {
     test.beforeEach(async ({ page }) => {
         await page.goto(data.url)
@@ -18,7 +17,7 @@ test.describe('Product flow', () => {
         await page.fill(id.emailInput, admUser.email)
         await page.fill(id.passwordInput, admUser.password)
         await page.click(id.loginButton)
-        await expect(page.getByRole('heading', { name: 'Bem vindo ' + admUser.name })).toBeVisible()
+        await expect(page.getByRole('heading', { name: 'Bem vindo ' + admUser.name})).toBeVisible()
     })
 
     const productA= {
@@ -50,7 +49,7 @@ test.describe('Product flow', () => {
             value: faker.number.bigInt({ max: 100n }),
             quantity: faker.number.bigInt({ max: 100n })
         }
-        
+
         await page.getByTestId('cadastrar-produtos').click()
         await expect(page.getByRole('heading', { name: 'Cadastro de produtos' })).toBeVisible()
 
