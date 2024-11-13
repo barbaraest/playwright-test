@@ -8,7 +8,7 @@ you can run tests with those commands bellow
 - npx playwright test --ui //open playwright interface 
 - npx playwright show-report
 - npx playwright test --headed --browser=all  //run tests in all browsers in the same time
-- npx playwright test/test.spec.js //runs specific test spec
+- npx playwright test tests/login.spec.tsß //runs specific test spec
 - npx playwright test -g "login with sucess" //run specific test 
 
 # Configurations 
