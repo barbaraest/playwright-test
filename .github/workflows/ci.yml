@@ -31,7 +31,6 @@ jobs:
       run: npm test
 
     - name: Generate Playwright report
-      run: npx playwright show-report
       if: failure() # Only generate report if tests fail
       run: npx playwright show-report --output=playwright-report
 
