@@ -13,6 +13,12 @@ test.beforeAll(async () => {
     nonAdmUser = await createNonAdmUser();
 });
 
+const user = {
+    password: faker.internet.password(),
+    newName: faker.person.firstName(),
+    newEmail: faker.internet.email(),
+};
+
 test.describe('Create user flow', () => {
     test.beforeEach(async ({ page }) => {
         await page.goto(data.url)
@@ -23,12 +29,6 @@ test.describe('Create user flow', () => {
         await page.click(id.loginButton)
         await expect(page.getByRole('heading', { name: 'Bem vindo ' + admUser.nome})).toBeVisible()
     })
-
-    const user = {
-        password: faker.internet.password(),
-        newName: faker.person.firstName(),
-        newEmail: faker.internet.email(),
-    };
 
     test('Should be able to create a new user with success', async ({ page }) => {
         await page.getByTestId('cadastrar-usuarios').click()
